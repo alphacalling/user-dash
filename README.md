@@ -57,7 +57,7 @@ Notifications: Success and error messages are displayed using react-hot-toast.
 Navigation: After successful login, the user is redirected to the home page using useNavigate from react-router-dom.
 
 ## screenshots
-![Alt text](assets/Screenshot%20(121).png);
-![Alt text](assets/Screenshot%20(122).png);
-![Alt text](assets/Screenshot%20(123).png);
-![Alt text](assets/Screenshot%20(124).png);
+![Alt text](assets/Screenshot%20(125).png);
+![Alt text](assets/Screenshot%20(126).png);
+![Alt text](assets/Screenshot%20(127).png);
+![Alt text](assets/Screenshot%20(128).png);
