@@ -1,82 +1,105 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-    const [userData, setUserData] = useState({
-        userName: "", email: "", password: ""
+  const [userData, setUserData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setUserData({
+      ...userData,
+      [name]: value,
     });
+  }
 
-    const navigate = useNavigate();
-    // console.log("useNavigate", useNavigate());
+  function handleSubmit(event) {
+    event.preventDefault();
 
-    function handleChange(event) {
-        const { name, value } = event.target;
-        console.log(event.target.value);
-        setUserData({
-            ...userData,
-            // [event.target.name]: event.target.value
-            [name]: value
-        });
-    }
+    axios
+      .post("http://localhost:5000/users", userData)
+      .then(() => {
+        toast.success("Sign up successful");
+        setUserData({ userName: "", email: "", password: "" });
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.error("Failed to send data", err);
+        toast.error("Signup failed");
+      });
+  }
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        console.log(userData);
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg flex flex-col gap-4"
+      >
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
+          Sign Up
+        </h2>
 
-        axios.post("http://localhost:5000/users", userData)
-            .then(() => {
-                console.log("user data sent to server");
-                toast.success("data sent successfully");
-                setUserData({ userName: "", email: "", password: "" });
-                navigate('/login');
-            }).catch((err) => {
-                console.err("failed to send data", err);
-                toast.error("signup fail")
-            })
-    }
-    return (
-        <div >
-            <form onSubmit={handleSubmit}
-                className='flex flex-col justify-center items-center mt-28 border 1px'>
-                <label htmlFor="userName" className='text-lg font-bold'>User Name:</label>
-                <input className='text-lg bg-slate-100 rounded-md m-2 pl-2 text-center'
-                    type="text"
-                    placeholder='Enter your name'
-                    id='userName'
-                    name='userName'
-                    required
-                    value={userData.userName}
-                    onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="email" className='text-lg font-bold'>Email:</label>
-                <input className='text-lg bg-slate-100 rounded-md m-2 pl-2 text-center'
-                    type="email"
-                    placeholder='Enter your email'
-                    id='email'
-                    name='email'
-                    required
-                    value={userData.email}
-                    onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="password" className='text-lg font-bold'>Password:</label>
-                <input className='text-lg bg-slate-100 rounded-md m-2 pl-2 text-center'
-                    type="password"
-                    placeholder='Enter your password'
-                    id='password'
-                    name='password'
-                    required
-                    value={userData.password}
-                    onChange={handleChange}
-                />
-                <button className='px-2 py-1 bg-green-600 rounded-lg
-                 text-lg font-bold hover:font-bold hover:bg-green-800'>Signup</button>
-            </form>
-        </div>
-    )
-}
+        <label
+          htmlFor="userName"
+          className="text-lg font-semibold text-gray-700"
+        >
+          User Name
+        </label>
+        <input
+          className="w-full text-lg bg-slate-100 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          type="text"
+          placeholder="Enter your name"
+          id="userName"
+          name="userName"
+          required
+          value={userData.userName}
+          onChange={handleChange}
+        />
 
-export default SignUp
+        <label htmlFor="email" className="text-lg font-semibold text-gray-700">
+          Email
+        </label>
+        <input
+          className="w-full text-lg bg-slate-100 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          type="email"
+          placeholder="Enter your email"
+          id="email"
+          name="email"
+          required
+          value={userData.email}
+          onChange={handleChange}
+        />
+
+        <label
+          htmlFor="password"
+          className="text-lg font-semibold text-gray-700"
+        >
+          Password
+        </label>
+        <input
+          className="w-full text-lg bg-slate-100 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          type="password"
+          placeholder="Enter your password"
+          id="password"
+          name="password"
+          required
+          value={userData.password}
+          onChange={handleChange}
+        />
+
+        <button className="w-full py-2 mt-4 bg-green-600 text-white text-lg font-semibold rounded-lg hover:bg-green-700 transition duration-300 ease-in-out">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default SignUp;

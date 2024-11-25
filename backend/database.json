@@ -1,16 +1,10 @@
 {
   "users": [
     {
-      "userName": "vikas",
+      "userName": "Vikas",
       "email": "vikaspandey490@gmail.com",
       "password": "",
       "id": "428e"
-    },
-    {
-      "id": "957a",
-      "userName": "Vikram Batra",
-      "email": "vikram@gmail.com",
-      "password": "12345"
     },
     {
       "id": "9515",
@@ -22,18 +16,6 @@
       "id": "7613",
       "userName": "tom",
       "email": "tom@gmail.com",
-      "password": "12345"
-    },
-    {
-      "id": "e418",
-      "userName": "divya",
-      "email": "divya@gmail.com",
-      "password": "12345"
-    },
-    {
-      "id": "455d",
-      "userName": "mohan",
-      "email": "mohan@gmail.com",
       "password": "12345"
     },
     {

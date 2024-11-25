@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { setUsers, deleteUser } from '../utils/userSlice';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setUsers, deleteUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
-const API_URL = 'http://localhost:5000/users';
+const API_URL = "http://localhost:5000/users";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Home = () => {
         const response = await axios.get(API_URL);
         dispatch(setUsers(response.data));
       } catch (error) {
-        console.error('Failed to fetch:', error);
+        console.error("Failed to fetch:", error);
       }
     };
 
@@ -31,7 +31,7 @@ const Home = () => {
       await axios.delete(`${API_URL}/${id}`);
       dispatch(deleteUser(id));
     } catch (error) {
-      console.error('Failed to delete:', error);
+      console.error("Failed to delete:", error);
     }
   };
 
@@ -46,7 +46,10 @@ const Home = () => {
       {error && <p className="text-red-500 text-center">{error}</p>}
       <ul className="space-y-4">
         {users.map((user) => (
-          <li key={user.id} className="flex justify-between items-center p-4 border border-gray-300 rounded-lg shadow-sm bg-white">
+          <li
+            key={user.id}
+            className="flex justify-between items-center p-4 border border-gray-300 rounded-lg shadow-sm bg-white"
+          >
             <div>
               <h3 className="font-semibold">{user.userName}</h3>
               <p className="text-gray-600">{user.email}</p>
